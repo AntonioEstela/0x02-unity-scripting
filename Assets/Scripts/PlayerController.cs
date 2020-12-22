@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 600f;
     public Rigidbody rb;
+    private int score = 0;
     void FixedUpdate()
     {
         if (Input.GetKey("d") || Input.GetKey(KeyCode.UpArrow))
@@ -23,6 +24,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("w") || Input.GetKey(KeyCode.LeftArrow))
         {
             rb.AddForce(0, 0, speed * Time.deltaTime);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Pickup")
+        {
+            score += 1;
+            Debug.Log($"Score: {score}");
+            Destroy(other);
         }
     }
 }
