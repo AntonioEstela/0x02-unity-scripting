@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             score += 1;
             Debug.Log($"Score: {score}");
-            Destroy(other);
+            other.gameObject.SetActive(false);
         }
     }
 }
