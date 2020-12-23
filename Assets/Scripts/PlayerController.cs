@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,14 @@ public class PlayerController : MonoBehaviour
     private int score = 0;
     public int health = 5;
 
+    void Update()
+    {
+        if (health == 0)
+        {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene("maze");
+        }
+    }
     void FixedUpdate()
     {
         if (Input.GetKey("d") || Input.GetKey(KeyCode.UpArrow))
@@ -42,6 +51,11 @@ public class PlayerController : MonoBehaviour
         {
             health -= 1;
             Debug.Log($"Health: {health}");
+        }
+
+        if (other.tag == "Goal")
+        {
+            Debug.Log("You win!");
         }
     }
 }
